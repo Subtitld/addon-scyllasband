@@ -52,8 +52,18 @@ def _start(cwd: Path, **extra_env: str) -> subprocess.Popen:
     else:
         env['PYTHONPATH'] = str(REPO_ROOT)
         command = [sys.executable, '-m', 'scyllasband_addon']
-    return subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.PIPE,
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # The log goes to a file, not a pipe nobody reads while waiting on stdout:
+    # Windows pipes fill after a few KiB and the add-on would block on its log.
+    log = tempfile.TemporaryFile()
+    proc = subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=log)
+    proc.log = log
+    return proc
+
+
+def _log(proc) -> str:
+    proc.log.seek(0)
+    return proc.log.read().decode('utf-8', 'replace')[-20000:]
 
 
 def _send(proc, frame: dict) -> None:
@@ -65,7 +75,7 @@ def _wait(proc, req_id: str) -> tuple[dict, list[dict]]:
     progress = []
     while True:
         line = proc.stdout.readline()
-        assert line, proc.stderr.read().decode('utf-8', 'replace')
+        assert line, _log(proc)
         frame = json.loads(line)
         if frame.get('id') != req_id:
             continue
@@ -102,8 +112,8 @@ def _stop(proc) -> None:
     proc.wait(timeout=30)
     proc.stdout.close()
     # The add-on's log, so a failure in CI says what the runtime did.
-    sys.stderr.write(proc.stderr.read().decode('utf-8', 'replace')[-20000:])
-    proc.stderr.close()
+    sys.stderr.write(_log(proc))
+    proc.log.close()
 
 
 def test_speaks_every_language_in_its_voices(tmp_path):
