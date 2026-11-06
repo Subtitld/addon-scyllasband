@@ -1,0 +1,12 @@
+GCC runtime libraries — GPL-3.0-or-later WITH GCC-exception-3.1
+
+Texts: COPYING3 and COPYING.RUNTIME, from the GCC source tree.
+Upstream: https://gcc.gnu.org/
+
+On Linux, libscyllasband_native.so is linked with -static-libstdc++ and
+-static-libgcc, so parts of libstdc++ and libgcc are inside it rather than
+beside it.
+
+The GCC Runtime Library Exception lets these libraries travel with a program
+under another licence without the program becoming GPL. No source offer is
+needed for the runtime libraries themselves.

@@ -1,0 +1,7 @@
+Scylla's Band native runtime (libscyllasband) — Apache-2.0
+
+Source: https://github.com/lowkeytea/scyllasband, directory libscyllasband/,
+built unmodified by tools/build_native.py at the commit it pins. The licence
+text in LICENSE is the repository's.
+
+Copyright the Scylla's Band authors (lowkeytea).

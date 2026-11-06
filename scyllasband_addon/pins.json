@@ -1,0 +1,108 @@
+{
+  "repo": "spybyscript/scyllasband",
+  "tag": "v3-20261104",
+  "revision": "c343e019402fd3aa3f6976e3ae016414c524c2d0",
+  "bundle": "litert",
+  "files": [
+    {
+      "path": "litert/assets/fixed_references.json",
+      "size": 1555673,
+      "sha256": "f227c55cab5f6b8cffa33c3dd743e69b26c7e446be5b9cd9a286095cabaa249e"
+    },
+    {
+      "path": "litert/assets/g2p/export_config.json",
+      "size": 928,
+      "sha256": "0ec5ea81f346521f3a5c9c4a90b939c6b5143b1a11cc5e74b9902969db56e568"
+    },
+    {
+      "path": "litert/assets/g2p/language_map.json",
+      "size": 844,
+      "sha256": "b3db2048b492799f8746b43001e0f7411eb5d359e17cabc6bfce4a7bccbfdd99"
+    },
+    {
+      "path": "litert/assets/g2p/normalization.json",
+      "size": 1090,
+      "sha256": "f9ca4fe4e4eca5e02b6f2874f5da6ede8b44b25c71c3c6ac00f96d7397024de6"
+    },
+    {
+      "path": "litert/assets/g2p/phoneme_dict.json",
+      "size": 93,
+      "sha256": "9cfb40b2fd31d7a32351c33f90230062554a4dc0a44e89f722de211d42ed1875"
+    },
+    {
+      "path": "litert/assets/g2p/pronunciation_overrides.json",
+      "size": 80,
+      "sha256": "a1f311379b76cb44719a2242a93a4046ff5f344cdac613374288234c2817eb59"
+    },
+    {
+      "path": "litert/assets/g2p/tokenizer.json",
+      "size": 7769,
+      "sha256": "4843d57a422b0a6045bbc6fc9a99afa329126a6742ff95ebcefcda660f3ee474"
+    },
+    {
+      "path": "litert/assets/languages.json",
+      "size": 289,
+      "sha256": "f2af2233d0a1c0dbb6e6236fd57592d12da84262fdd1a336ead1ee83a657e2ae"
+    },
+    {
+      "path": "litert/assets/phone_vocab.json",
+      "size": 1793,
+      "sha256": "83e6457a69948edbd9a94b404c22fd408c263eb0d0b5acaafa4926e994587721"
+    },
+    {
+      "path": "litert/assets/voices.json",
+      "size": 613,
+      "sha256": "64b1b317b859e8b98d2802ecc2ff5be7edfcb82d4c641a4aa4a5a4d18fc4841b"
+    },
+    {
+      "path": "litert/litert/duration_predictor.tflite",
+      "size": 13195440,
+      "sha256": "2d787f7f6b307c8658d71bab269ce168509156b36468c6def37b007c0afe0f4d"
+    },
+    {
+      "path": "litert/litert/g2p.tflite",
+      "size": 33979216,
+      "sha256": "557127105fed3041845d7bd1e36d6aeea66ecb9e329fa29eb8d0d048b4c0fad9"
+    },
+    {
+      "path": "litert/litert/pitch_context_encoder.tflite",
+      "size": 4872368,
+      "sha256": "0dbd88f128a4d3df4d0c018849292da6da26aace6422e80c8ea19eaa275fd877"
+    },
+    {
+      "path": "litert/litert/pitch_estimator.tflite",
+      "size": 38435904,
+      "sha256": "752d6ebb8ebdf53036eb407a0fadaec14a2571e506918ff0ec28006dbc764cca"
+    },
+    {
+      "path": "litert/litert/vector_context_encoder.tflite",
+      "size": 8189632,
+      "sha256": "4de98b94687c89cdec0a8c627381858c541149611817d8cfa3b687b5663b2a7c"
+    },
+    {
+      "path": "litert/litert/vector_estimator.tflite",
+      "size": 95182528,
+      "sha256": "926c9c79cc3c877f6ca8fbd22ea02ae1ab66e5d244d5d5f66a3306c55e7d3150"
+    },
+    {
+      "path": "litert/litert/vocoder.tflite",
+      "size": 44716640,
+      "sha256": "d4fff14f8ac9078fd7df504340562147229ec14a69779231861ba76ee732982d"
+    },
+    {
+      "path": "litert/manifest.json",
+      "size": 48465,
+      "sha256": "423664a07ca072ee59d24206bce6a17e8b4d5b530a471fa1b8fad490ed8b6ebd"
+    },
+    {
+      "path": "LICENSE",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "size": 2829,
+      "sha256": "757a3eca5f8284352d471887af2c31b65c5d23d2a642f0ae77e6a11c150dba39"
+    }
+  ]
+}

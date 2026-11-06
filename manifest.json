@@ -1,0 +1,175 @@
+{
+  "manifest_version": 1,
+  "id": "scyllasband",
+  "version": "26.11.1",
+  "display_name": "Scylla's Band (offline, 14 voices, 6 languages)",
+  "summary": "Scylla's Band speaks English, Spanish, Italian, French, German and Vietnamese at 24 kHz in fourteen voices, each in all six languages, with how intense, how fast and how high they speak set in Configure. Light and quick: the model, about 240 MB, downloads on first use, and a line takes a fraction of its length on the CPU. Built-in voices only; it does not clone.",
+  "author": "Subtitld",
+  "homepage": "https://github.com/Subtitld/addon-scyllasband",
+  "license": "Apache-2.0 (add-on, Scylla's Band runtime, LiteRT and the Scylla's Band weights, downloaded on first use)",
+  "executable": "bin/scyllasband-addon",
+  "protocol": 1,
+  "startup_timeout_sec": 30,
+  "platforms": [
+    "linux",
+    "macos",
+    "windows"
+  ],
+  "tasks": [
+    "tts.synthesize"
+  ],
+  "compute": "cpu",
+  "voice_clone": false,
+  "languages": [
+    "en",
+    "es",
+    "it",
+    "fr",
+    "de",
+    "vi"
+  ],
+  "voices": [
+    {
+      "id": "scylla",
+      "language": "*",
+      "display_name": "Scylla (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "ariadne",
+      "language": "*",
+      "display_name": "Ariadne (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "felix",
+      "language": "*",
+      "display_name": "Felix (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "gwen",
+      "language": "*",
+      "display_name": "Gwen (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "ink",
+      "language": "*",
+      "display_name": "Ink (British English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "kincade",
+      "language": "*",
+      "display_name": "Kincade (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "max",
+      "language": "*",
+      "display_name": "Max (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "orpheus",
+      "language": "*",
+      "display_name": "Orpheus (British English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "poppy",
+      "language": "*",
+      "display_name": "Poppy (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "priya",
+      "language": "*",
+      "display_name": "Priya (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "rex",
+      "language": "*",
+      "display_name": "Rex (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "stone",
+      "language": "*",
+      "display_name": "Stone (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "thistle",
+      "language": "*",
+      "display_name": "Thistle (American English)",
+      "sample_rate": 24000
+    },
+    {
+      "id": "tuesday",
+      "language": "*",
+      "display_name": "Tuesday (British English)",
+      "sample_rate": 24000
+    }
+  ],
+  "models": [
+    {
+      "id": "scyllasband-litert",
+      "display_name": "Scylla's Band v3-20261104 (LiteRT bundle)",
+      "repo": "spybyscript/scyllasband",
+      "revision": "c343e019402fd3aa3f6976e3ae016414c524c2d0",
+      "size_mb": 240,
+      "license": "Apache-2.0",
+      "bundled": false,
+      "default": true
+    }
+  ],
+  "disk_required_mb": 300,
+  "ram_required_mb": 700,
+  "config_schema": {
+    "fields": [
+      {
+        "key": "intensity",
+        "type": "number",
+        "label": "Intensity",
+        "default": 0,
+        "min": -2,
+        "max": 2,
+        "step": 0.5,
+        "help": "How much the voice puts into the line, from calm (−2) to intense (2). 0 is each voice's own delivery. It changes how strongly the line's emotion comes through, not which emotion it is."
+      },
+      {
+        "key": "pace",
+        "type": "number",
+        "label": "Pace",
+        "default": 0,
+        "min": -2,
+        "max": 2,
+        "step": 0.5,
+        "help": "Slower (−2) to faster (2), the words and the pauses between them, measured in each voice's own range. Subtitld's speed control still applies on top."
+      },
+      {
+        "key": "pitch",
+        "type": "number",
+        "label": "Pitch",
+        "default": 0,
+        "min": -2,
+        "max": 2,
+        "step": 0.5,
+        "help": "Shifts the voice up or down, in semitones."
+      },
+      {
+        "key": "threads",
+        "type": "int",
+        "label": "CPU threads",
+        "default": 0,
+        "min": 0,
+        "max": 256,
+        "step": 1,
+        "help": "0 lets the runtime choose (up to 4). Fewer leaves the computer more responsive while dubbing."
+      }
+    ]
+  }
+}
