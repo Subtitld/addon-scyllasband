@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "subtitld-addon-scyllasband"
-version = "26.11.1"
+version = "26.11.2"
 description = "Subtitld add-on: offline text-to-speech with Scylla's Band, 14 voices in 6 languages"
 readme = "README.md"
 license = { text = "Apache-2.0" }

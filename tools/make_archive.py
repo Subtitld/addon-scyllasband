@@ -11,7 +11,7 @@ aliases), so every link is stored as the file it points to. That also
 sidesteps `shutil.make_archive`, which follows file links but writes linked
 DIRECTORIES as empty entries.
 
-    python tools/make_archive.py release-staging scyllasband-26.11.1-linux-x86_64.zip
+    python tools/make_archive.py release-staging scyllasband-26.11.2-linux-x86_64.zip
 """
 
 from __future__ import annotations

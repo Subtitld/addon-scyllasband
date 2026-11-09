@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "id": "scyllasband",
-  "version": "26.11.1",
+  "version": "26.11.2",
   "display_name": "Scylla's Band (offline, 14 voices, 6 languages)",
   "summary": "Scylla's Band speaks English, Spanish, Italian, French, German and Vietnamese at 24 kHz in fourteen voices, each in all six languages, with how intense, how fast and how high they speak set in Configure. Light and quick: the model, about 240 MB, downloads on first use, and a line takes a fraction of its length on the CPU. Built-in voices only; it does not clone.",
   "author": "Subtitld",
