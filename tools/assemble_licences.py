@@ -48,6 +48,9 @@ RULES = [
     (r'^libffi[-.\d]*\.(so|dylib|dll)', 'python-runtime-libs/libffi-LICENSE', 'libffi'),
     (r'^libexpat[-.\d]*\.(so|dylib|dll)', 'python-runtime-libs/expat-COPYING', 'Expat'),
     (r'^(libz\.(so|dylib)|zlib\d*\.dll)', 'python-runtime-libs/zlib-LICENSE', 'zlib'),
+    # OpenSSL 1.1.1 (the Linux build's, from AlmaLinux 8) is under the OpenSSL
+    # and SSLeay licences; OpenSSL 3 under Apache-2.0.
+    (r'^lib(ssl|crypto)\.so\.1\.1', 'python-runtime-libs/openssl-1.1-LICENSE.txt', 'OpenSSL 1.1.1'),
     (r'^lib(ssl|crypto)[-.\d]', 'python-runtime-libs/openssl-LICENSE.txt', 'OpenSSL'),
     # Excluded from the bundle by pyinstaller.spec. Listed so that, should one
     # come back, the build names the notice to commit instead of a bare file.
@@ -55,6 +58,7 @@ RULES = [
     (r'^liblzma', 'python-runtime-libs/xz-COPYING', 'XZ Utils'),
     (r'^libzstd', 'python-runtime-libs/zstd-LICENSE', 'zstd'),
     (r'^libmpdec', 'python-runtime-libs/mpdecimal-LICENSE', 'mpdecimal'),
+    (r'^libuuid', 'python-runtime-libs/libuuid-COPYING', 'libuuid'),
     (r'^(vcruntime140(_1|_threads)?|msvcp140(_\w+)?|vcomp140|concrt140)\.dll$', 'msvc-runtime/NOTICE.txt',
      'Microsoft C runtime'),
     (r'^(ucrtbase|api-ms-win-[\w-]+)\.dll$', 'msvc-runtime/NOTICE.txt', 'Universal C runtime'),

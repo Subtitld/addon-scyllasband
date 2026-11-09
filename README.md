@@ -57,5 +57,14 @@ python -m venv .venv && .venv/bin/pip install -e '.[build,dev]'
 `tools/build_native.py` needs git, CMake and a C++17 compiler. On Windows it
 needs the MSVC environment; on Linux it uses `patchelf` when it is installed.
 
+The Linux release archive is built in an AlmaLinux 8 container, so it runs on
+glibc 2.28 and newer (RHEL and AlmaLinux 8, Debian 10, Ubuntu 20.04 and
+later). `tools/check_glibc.py` fails the build if any file in it needs more.
+
+```bash
+tools/build_linux.sh                    # scyllasband-<version>-linux-x86_64.zip; needs Docker
+tools/test_archive.sh almalinux:8       # tests/test_installed.py on the zip, in a clean container
+```
+
 To move to another model release, run `tools/pin_model.py --tag <tag>`. The
 tag must be a `v3-*` release: the pinned runtime speaks graph contract v3.

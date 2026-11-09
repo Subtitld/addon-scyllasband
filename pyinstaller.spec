@@ -114,15 +114,17 @@ a = Analysis(
         'numpy', 'torch', 'torchaudio', 'onnxruntime', 'setuptools', 'pkg_resources', 'unittest', 'pydoc_data', 'pytest',
         'huggingface_hub', 'requests', 'urllib3', 'certifi',
         # Standard modules the add-on never calls, reached only through
-        # optional imports (shutil's archive formats, random's hash fallback).
+        # optional imports (shutil's archive formats, random's hash fallback,
+        # and uuid, which Python 3.12's wave imports for one error message).
         # Each one would bring a native library, and with it a licence to
-        # ship: bzip2, xz, zstd, libmpdec. ssl and hashlib stay: the models
-        # download over HTTPS and are checked by sha256, so OpenSSL ships.
+        # ship: bzip2, xz, zstd, libmpdec, libuuid. ssl and hashlib stay: the
+        # models download over HTTPS and are checked by sha256, so OpenSSL
+        # ships.
         # tests/test_installed.py runs the frozen binary end to end, so a
         # module that turns out to be needed fails the release build, not
         # the user.
         'bz2', '_bz2', 'lzma', '_lzma', 'compression', '_zstd',
-        'decimal', '_decimal', '_pydecimal',
+        'decimal', '_decimal', '_pydecimal', '_uuid',
     ],
     noarchive=False,
 )

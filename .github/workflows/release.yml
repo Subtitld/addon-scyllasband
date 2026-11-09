@@ -11,6 +11,10 @@ name: Release
 # its release zip the way Subtitld installs it, downloads the model (240 MB)
 # and speaks all six languages through the protocol, with nothing but what is
 # inside its own bundle, before anything is published.
+#
+# Linux builds in the AlmaLinux 8 container (tools/build_linux.sh), so the
+# archive runs on glibc 2.28 and newer; tools/check_glibc.py refuses it if any
+# file needs more, and the archive is also run on AlmaLinux 8 itself.
 
 on:
   push:
@@ -107,14 +111,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Linux: the container builds libscyllasband, the bundle and the archive,
+      # and checks the archive's glibc floor; the steps after it only check them.
+      - name: Build in the AlmaLinux 8 container
+        if: matrix.platform_label == 'linux-x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          tools/build_linux.sh
+          version=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
+          echo "ARCHIVE_NAME=scyllasband-${version}-linux-x86_64.zip" >> "$GITHUB_ENV"
+          pip install -q pytest
+
       - name: Install build deps
+        if: matrix.platform_label != 'linux-x86_64'
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
           pip install -e '.[build,dev]'
-          # patchelf gives libscyllasband the RUNPATH $ORIGIN (tools/build_native.py).
-          if [ "$RUNNER_OS" = Linux ]; then pip install patchelf; fi
           # GitHub's runners have CMake; a local run with act may not.
           command -v cmake >/dev/null || pip install cmake
           python -c "from importlib.metadata import version as v; import platform, ssl; print('python', platform.python_version(), '| pyinstaller', v('pyinstaller'), '|', ssl.OPENSSL_VERSION)"
@@ -126,21 +141,25 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Build libscyllasband
+        if: matrix.platform_label != 'linux-x86_64'
         shell: bash
         run: |
           python tools/build_native.py
           pytest -q tests/test_engine.py
 
       - name: Build bundle
+        if: matrix.platform_label != 'linux-x86_64'
         shell: bash
         run: pyinstaller pyinstaller.spec --noconfirm
 
       # Fails the build when a native file in the bundle has no notice.
       - name: Assemble third-party licences
+        if: matrix.platform_label != 'linux-x86_64'
         shell: bash
         run: python tools/assemble_licences.py --bundle dist/scyllasband-addon --out release-staging/THIRD_PARTY_LICENSES
 
       - name: Stage archive
+        if: matrix.platform_label != 'linux-x86_64'
         shell: bash
         run: |
           set -euo pipefail
@@ -232,6 +251,16 @@ jobs:
           if skipped:
               sys.exit(f'FATAL: {skipped} installed-binary test(s) skipped')
           PY
+
+      # The runner has glibc 2.35. The same tests, on the oldest glibc the
+      # add-on supports, with the model the step above downloaded.
+      - name: Prove the archive on AlmaLinux 8 (glibc 2.28)
+        if: matrix.platform_label == 'linux-x86_64'
+        timeout-minutes: 30
+        shell: bash
+        env:
+          SCYLLASBAND_TEST_MODELS_DIR: ${{ runner.temp }}/models
+        run: tools/test_archive.sh almalinux:8 "$ARCHIVE_NAME"
 
       - name: Assert the archive is complete
         shell: bash
